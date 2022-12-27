@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html><body>
+    <style>
+        button
+        {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+    <div>WebCalc!</div>
+    <input style="font-size: 28px; text-align: right;" /><br />
+    <script>
+    function calc_update( _v ) // input tagを更新する関数
+    {
+        document.querySelector( 'input' ).value = _v
+    }
+    function calc_append( _v ) // 数字ボタンが押されたので数字を後ろに追加する
+    {
+        document.querySelector( 'input' ).value += _v
+    }
+    function calc_eq() // =ボタンが押された
+    {
+        const v = document.querySelector( 'input' ).value
+        try {
+            const f = new Function( 'return ' + v )
+            calc_update( f().toString() )
+        } catch( _error ) {
+            calc_update( _error ) // 計算に失敗した場合は、そのエラーの内容を表示する
+        }
+
+    }
+    </script>
+    <button onclick="calc_update( '' )">CLR</button>
+    <button onclick="append( '/' )" >/</button>
+    <button onclick="append( '**' )" >^</button>
+    <button onclick="append( '**0.5' )" >√</button>
+    <br />
+    <button onclick="calc_append( '7' )" >7</button>
+    <button onclick="calc_append( '8' )" >8</button>
+    <button onclick="calc_append( '9' )" >9</button>
+    <button onclick="append( '*' )" >*</button>
+    <br />
+    <button onclick="calc_append( '4' )" >4</button>
+    <button onclick="calc_append( '5' )" >5</button>
+    <button onclick="calc_append( '6' )" >6</button>
+    <button onclick="append( '-' )" >-</button>
+    <br />
+    <button onclick="calc_append( '1' )">1</button>
+    <button onclick="calc_append( '2' )">2</button>
+    <button onclick="calc_append( '3' )">3</button>
+    <button onclick="append( '+' )" >+</button>
+    <br />
+    <button onclick="calc_append( '0' )">0</button>
+    <button onclick="append( '.' )" >.</button>
+    
+    <button onclick="calc_eq()" style="width:105px;">=</button>
+    
+</body></html>
